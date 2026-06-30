@@ -4,14 +4,14 @@ import animal.Dog;
 import animal.Fish;
 import finance.Money;
 import hr.Person;
+import shape.Circle;
+import shape.Shape;
+import shape.Square;
 
 import java.util.HashSet;
 import java.util.List;
 
 public class Main {
-
-
-
     public static void main(String[] args) {
 
         var cat = new Cat("kitty");
@@ -62,6 +62,17 @@ public class Main {
         for(var a : animals) {
             feedAnimal(a);
         }
+
+        IO.println(area(new Circle(10)));
+
+        var name = "Mohammed";
+        var age = 18;
+
+        var intro = "%s is %d years old"
+                .formatted(name, age);
+        var intro2 = String.format("%s is %d years old",
+                                        name, age);
+        IO.println(intro);
     }
 
     static void feedAnimal(Animal animal) {
@@ -70,5 +81,28 @@ public class Main {
             case Dog(var name) -> IO.println("feed %s chicken".formatted(name));
             case Fish(var name) -> IO.println("feed %s bread".formatted(name));
         }
+    }
+
+    static double area(Shape s) {
+        var result = 0.0;
+
+        switch(s) {
+            case Circle circle when circle.r() <= 0 -> {
+                result = 0;
+            }
+
+            case Square square when square.side() == 0 -> {
+                result = 0;
+            }
+
+            case Circle circle -> {
+                result = Math.PI * circle.r() * circle.r();
+            }
+            case Square square -> {
+                result = square.side() * square.side();
+            }
+        }
+
+        return result;
     }
 }
