@@ -10,6 +10,7 @@ import shape.Square;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
@@ -50,9 +51,35 @@ public class Main {
         var p3 = new Person("Islam", 3);
         var p4 = new Person("Essideeq", 4);
         var p5 = new Person("mohammed", 5);
+
+        // old way creating new data structures
         var attendees = new HashSet<>(List.of(p1, p1, p1, p2, p3, p4, p5, p5));
+
+        var names = new HashSet<String>();
+        for (var a:attendees) {
+            names.add(a.name());
+        }
+
+        var capitalizedNames = new HashSet<>();
+        for (var n : names){
+            capitalizedNames.add(n.toUpperCase());
+        }
+
+        // New way
+        var capitalizedNames2 = attendees
+                .stream()
+                .map(a -> a.name())
+                .map(n -> n.toUpperCase())
+                .filter(n -> !n.startsWith("M"))
+                .collect(Collectors.toSet());
+
+        IO.println("=========");
+        IO.println(capitalizedNames2);
+        IO.println("=========");
+
+
         attendees.add(new Person("Ali", 1));
-        IO.println(attendees);
+//        IO.println(attendees);
         var animals = List.of(
                 new Dog("woofie"),
                 new Cat("mimi"),
@@ -73,6 +100,26 @@ public class Main {
         var intro2 = String.format("%s is %d years old",
                                         name, age);
         IO.println(intro);
+
+        var words = List.of("git",
+                "docker",
+                "java",
+                "kafka",
+                "quarkus");
+
+        IO.println(words);
+
+        // CAPITALISE ALL WORDS
+        "mo".toUpperCase(); // == MO // example
+
+        var capitalizedWords =
+                words.stream().map(word -> word.toUpperCase()).toList();
+
+        // Filter technology names with 4 or fewer words
+        var filteredWords = capitalizedWords.stream().filter(capitalizedWord -> capitalizedWord.length() <= 4).toList();
+
+        IO.println(capitalizedWords);
+        IO.println(filteredWords);
     }
 
     static void feedAnimal(Animal animal) {
