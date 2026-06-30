@@ -1,7 +1,10 @@
 import animal.Cat;
 import finance.Money;
+import hr.Person;
 
 import java.math.BigDecimal;
+import java.util.HashSet;
+import java.util.List;
 
 public class Main {
 
@@ -40,7 +43,13 @@ public class Main {
         var m5 = m3.plus(m2);
         IO.println(m5);
 
-
-
+        var p1 = new Person("Ali", 1);
+        var p2 = new Person("Omar", 2);
+        var p3 = new Person("Islam", 3);
+        var p4 = new Person("Essideeq", 4);
+        var p5 = new Person("mohammed", 5);
+        var attendees = new HashSet<>(List.of(p1, p1, p1, p2, p3, p4, p5, p5));
+        attendees.add(new Person("Ali", 1));
+        IO.println(attendees);
     }
 }
