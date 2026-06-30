@@ -1,8 +1,10 @@
+import animal.Animal;
 import animal.Cat;
+import animal.Dog;
+import animal.Fish;
 import finance.Money;
 import hr.Person;
 
-import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.List;
 
@@ -12,14 +14,14 @@ public class Main {
 
     public static void main(String[] args) {
 
-        var cat = new Cat();
+        var cat = new Cat("kitty");
         cat.meow();
 
         IO.println("===========");
         IO.println("hello world");
         IO.println("============");
 
-        var cat2 = new Cat();
+        var cat2 = new Cat("mimi");
         var x = 10;
         x = 20;
         x = 99;
@@ -51,5 +53,22 @@ public class Main {
         var attendees = new HashSet<>(List.of(p1, p1, p1, p2, p3, p4, p5, p5));
         attendees.add(new Person("Ali", 1));
         IO.println(attendees);
+        var animals = List.of(
+                new Dog("woofie"),
+                new Cat("mimi"),
+                new Fish("fifi")
+        );
+
+        for(var a : animals) {
+            feedAnimal(a);
+        }
+    }
+
+    static void feedAnimal(Animal animal) {
+        switch (animal) {
+            case Cat(var name) -> IO.println("feed %s fish".formatted(name));
+            case Dog(var name) -> IO.println("feed %s chicken".formatted(name));
+            case Fish(var name) -> IO.println("feed %s bread".formatted(name));
+        }
     }
 }
